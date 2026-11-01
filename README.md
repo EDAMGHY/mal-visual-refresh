@@ -45,24 +45,9 @@ Keyword searches show fewer columns than browsing (only Type / Eps. / Score), so
 
 ## Install
 
-The extension isn't on the Chrome Web Store yet. To install it from source you need [Node.js](https://nodejs.org/) 18 or newer.
+**Coming soon to the Chrome Web Store.** Once it's listed, you'll be able to install it in one click from there, and Chrome will keep it up to date automatically.
 
-```bash
-git clone https://github.com/EDAMGHY/mal-visual-refresh.git
-```
-
-```bash
-cd mal-visual-refresh && npm install && npm run build
-```
-
-Then in Chrome:
-
-1. Open `chrome://extensions`.
-2. Turn on **Developer mode** (top right).
-3. Click **Load unpacked** and select the `dist/` folder.
-4. Open a MyAnimeList search or top list.
-
-**To update:** run `git pull && npm run build`, click the reload icon on the extension's card in `chrome://extensions`, then refresh the MAL tab.
+Want to try it before then, or test changes? See [Run from source](#run-from-source-testing).
 
 ## How to use
 
@@ -87,6 +72,31 @@ Then in Chrome:
 - **Chrome only** for now. Firefox support is planned.
 
 ## Development
+
+### Run from source (testing)
+
+Use this to try unreleased changes or to test the extension locally. You need [Node.js](https://nodejs.org/) 18 or newer.
+
+```bash
+git clone https://github.com/EDAMGHY/mal-visual-refresh.git
+```
+
+```bash
+cd mal-visual-refresh && npm install && npm run build
+```
+
+Then in Chrome:
+
+1. Open `chrome://extensions`.
+2. Turn on **Developer mode** (top right).
+3. Click **Load unpacked** and select the `dist/` folder.
+4. Open a MyAnimeList search or top list.
+
+**After a change:** run `npm run build` (or keep `npm run watch` running), click the reload icon on the extension's card in `chrome://extensions`, then refresh the MAL tab.
+
+If you also have the store version installed, turn it off while testing, so the two versions don't both change the page.
+
+### Commands
 
 ```bash
 npm run build       # one-off build into dist/
