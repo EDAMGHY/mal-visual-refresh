@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>MAL Visual Refresh</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <h1>MAL Visual Refresh</h1>
+    <label class="row"><input type="checkbox" id="enabled" /> Enable on search &amp; top lists</label>
+    <label class="row">
+      Layout
+      <select id="view">
+        <option value="grid">Grid</option>
+        <option value="wall">Posters</option>
+        <option value="list">List</option>
+        <option value="original">Original</option>
+      </select>
+    </label>
+    <label class="row">
+      Posters
+      <select id="posterFit">
+        <option value="cover">Fill frame</option>
+        <option value="contain">Fit whole poster</option>
+      </select>
+    </label>
+    <button id="reset" type="button">Reset to defaults</button>
+    <p class="note">Unofficial extension. Not affiliated with MyAnimeList.</p>
+    <script src="popup.js"></script>
+  </body>
+</html>

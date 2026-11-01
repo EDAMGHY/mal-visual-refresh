@@ -1,0 +1,634 @@
+/* Everything is scoped to #malvr-root, .malvr-full, or the single hide class on MAL's table. */
+
+.malvr-native-hidden {
+  display: none !important;
+}
+
+#malvr-root,
+.malvr-full {
+  --malvr-bg: #ffffff;
+  --malvr-surface: #f4f6fa;
+  --malvr-surface-2: #e8ecf3;
+  --malvr-border: #d5dbe5;
+  --malvr-text: #1c1f26;
+  --malvr-muted: #5b6475;
+  --malvr-accent: #2e51a2;
+  --malvr-accent-text: #ffffff;
+  --malvr-score: #f5c518;
+  --malvr-shadow: 0 6px 18px rgb(15 23 42 / 0.18);
+  --malvr-radius: 8px;
+  color: var(--malvr-text);
+  font-family: inherit;
+}
+
+html.dark-mode #malvr-root,
+html.dark-mode .malvr-full {
+  --malvr-bg: #181818;
+  --malvr-surface: #222326;
+  --malvr-surface-2: #2c2e33;
+  --malvr-border: #3a3d44;
+  --malvr-text: #e6e8ec;
+  --malvr-muted: #a3a9b5;
+  --malvr-accent: #6d8ee0;
+  --malvr-accent-text: #0d1117;
+  --malvr-shadow: 0 8px 24px rgb(0 0 0 / 0.55);
+}
+
+#malvr-root {
+  --malvr-size: 190px;
+  margin: 8px 0 16px;
+}
+
+#malvr-root *,
+.malvr-full * {
+  box-sizing: border-box;
+}
+
+#malvr-root :focus-visible,
+.malvr-full :focus-visible {
+  outline: 2px solid var(--malvr-accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Toolbar ---------- */
+
+.malvr-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 8px 10px;
+  margin-bottom: 12px;
+  background: var(--malvr-surface);
+  border: 1px solid var(--malvr-border);
+  border-radius: var(--malvr-radius);
+  font-size: 12px;
+}
+
+.malvr-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.malvr-toolbar button,
+.malvr-select {
+  font: inherit;
+  color: var(--malvr-text);
+  background: var(--malvr-bg);
+  border: 1px solid var(--malvr-border);
+  border-radius: 6px;
+  padding: 4px 10px;
+  min-height: 28px;
+  cursor: pointer;
+}
+
+.malvr-toolbar button:hover {
+  background: var(--malvr-surface-2);
+}
+
+.malvr-toolbar button[aria-pressed='true'] {
+  background: var(--malvr-accent);
+  border-color: var(--malvr-accent);
+  color: var(--malvr-accent-text);
+}
+
+.malvr-toolbar .malvr-icon {
+  width: 28px;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.malvr-toolbar .malvr-preset {
+  width: 28px;
+  padding: 0;
+}
+
+.malvr-slider {
+  width: 110px;
+  accent-color: var(--malvr-accent);
+}
+
+.malvr-hint {
+  margin-left: auto;
+  color: var(--malvr-muted);
+}
+
+.malvr-toolbar[data-view='original'] .malvr-grid-only {
+  display: none;
+}
+
+/* ---------- Cards (shared) ---------- */
+
+.malvr-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--malvr-size), 100%), 1fr));
+  gap: 18px 14px;
+}
+
+.malvr-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin: 0;
+}
+
+.malvr-poster-btn {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--malvr-radius);
+  background: var(--malvr-surface-2);
+  cursor: zoom-in;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.malvr-poster-btn:hover,
+.malvr-poster-btn:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: var(--malvr-shadow);
+}
+
+.malvr-poster {
+  display: block;
+  width: 100%;
+  aspect-ratio: 225 / 318;
+  background: var(--malvr-surface-2);
+}
+
+.malvr-poster img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#malvr-root[data-fit='contain'] .malvr-poster img {
+  object-fit: contain;
+}
+
+:is(#malvr-root, #malvr-full) .malvr-poster-missing {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  color: var(--malvr-muted);
+  font-size: 12px;
+}
+
+/* Badges are <span>s, and MAL's `.page-common span` reset (padding: 0) outranks a single class,
+   so badge rules are anchored on an id. */
+:is(#malvr-root, #malvr-full) .malvr-score {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgb(0 0 0 / 0.72);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+:is(#malvr-root, #malvr-full) .malvr-score > span {
+  color: var(--malvr-score);
+}
+
+/* Rank: a corner tab that grows with the poster size; medals for the top three. */
+:is(#malvr-root, #malvr-full) .malvr-rank {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 1px;
+  padding: 5px 10px 6px 8px;
+  border-radius: var(--malvr-radius) 0 10px 0;
+  background: rgb(14 17 24 / 0.85);
+  color: #fff;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.4);
+  font-size: clamp(15px, calc(var(--malvr-size) * 0.11), 28px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+:is(#malvr-root, #malvr-full) .malvr-rank-hash {
+  font-size: 0.6em;
+  font-weight: 700;
+  opacity: 0.7;
+}
+
+:is(#malvr-root, #malvr-full) .malvr-rank[data-tier='gold'] {
+  background: linear-gradient(135deg, #fde68a, #f2b52c 55%, #c9871a);
+  color: #3a2600;
+}
+
+:is(#malvr-root, #malvr-full) .malvr-rank[data-tier='silver'] {
+  background: linear-gradient(135deg, #f8fafc, #c5ccd6 55%, #8e98a6);
+  color: #1d232c;
+}
+
+:is(#malvr-root, #malvr-full) .malvr-rank[data-tier='bronze'] {
+  background: linear-gradient(135deg, #f6c08f, #d07f3e 55%, #9c5424);
+  color: #2b1405;
+}
+
+:is(#malvr-root, #malvr-full) .malvr-rank[data-tier='top10'] {
+  box-shadow: inset 0 -3px 0 var(--malvr-accent), 0 2px 10px rgb(0 0 0 / 0.4);
+}
+
+/* With a rank in the corner, the score moves to the other side. */
+:is(#malvr-root, #malvr-full) .malvr-poster-btn:has(.malvr-rank) .malvr-score {
+  left: auto;
+  right: 6px;
+}
+
+.malvr-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 2px 0;
+  min-width: 0;
+}
+
+.malvr-title {
+  color: var(--malvr-text) !important;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+.malvr-title:hover {
+  color: var(--malvr-accent) !important;
+  text-decoration: underline;
+}
+
+.malvr-meta,
+.malvr-members {
+  color: var(--malvr-muted);
+  font-size: 11px;
+}
+
+.malvr-members {
+  display: none;
+}
+
+.malvr-synopsis {
+  display: none;
+  margin: 2px 0 0;
+  color: var(--malvr-muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+#malvr-root[data-synopsis='true'] .malvr-synopsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.malvr-add {
+  align-self: flex-start;
+  margin-top: 4px;
+  font: inherit;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--malvr-border);
+  background: transparent;
+  color: var(--malvr-muted);
+  cursor: pointer;
+}
+
+.malvr-add:hover {
+  color: var(--malvr-accent);
+  border-color: var(--malvr-accent);
+}
+
+/* ---------- Posters (wall) view: posters only, info on hover/focus ---------- */
+
+#malvr-root[data-view='wall'] .malvr-cards {
+  gap: 8px;
+}
+
+#malvr-root[data-view='wall'] .malvr-body {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 28px 8px 8px;
+  border-radius: 0 0 var(--malvr-radius) var(--malvr-radius);
+  background: linear-gradient(transparent, rgb(0 0 0 / 0.88) 45%);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  pointer-events: none;
+}
+
+#malvr-root[data-view='wall'] .malvr-card:hover .malvr-body,
+#malvr-root[data-view='wall'] .malvr-card:focus-within .malvr-body {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+#malvr-root[data-view='wall'] .malvr-title {
+  color: #fff !important;
+}
+
+#malvr-root[data-view='wall'] .malvr-meta {
+  color: #d0d4dc;
+}
+
+#malvr-root[data-view='wall'] .malvr-synopsis,
+#malvr-root[data-view='wall'] .malvr-add {
+  display: none;
+}
+
+#malvr-root[data-view='wall'] .malvr-poster-btn:hover {
+  transform: none;
+}
+
+/* ---------- List view: poster + full row of details ---------- */
+
+#malvr-root[data-view='list'] .malvr-cards {
+  grid-template-columns: repeat(auto-fill, minmax(min(460px, 100%), 1fr));
+  gap: 12px;
+}
+
+#malvr-root[data-view='list'] .malvr-card {
+  flex-direction: row;
+  gap: 12px;
+  padding: 8px;
+  background: var(--malvr-surface);
+  border: 1px solid var(--malvr-border);
+  border-radius: var(--malvr-radius);
+}
+
+#malvr-root[data-view='list'] .malvr-poster-btn {
+  flex: none;
+  width: clamp(80px, calc(var(--malvr-size) * 0.6), 200px);
+}
+
+#malvr-root[data-view='list'] .malvr-body {
+  flex: 1;
+  padding: 2px 0;
+}
+
+#malvr-root[data-view='list'] .malvr-title {
+  font-size: 14px;
+}
+
+#malvr-root[data-view='list'] .malvr-members,
+#malvr-root[data-view='list'] .malvr-synopsis {
+  display: block;
+}
+
+#malvr-root[data-view='list'] .malvr-synopsis {
+  font-size: 12px;
+}
+
+/* ---------- Full view dialog ---------- */
+
+.malvr-full {
+  width: min(1040px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  padding: 0;
+  border: 1px solid var(--malvr-border);
+  border-radius: 12px;
+  background: var(--malvr-bg);
+  box-shadow: 0 20px 60px rgb(0 0 0 / 0.5);
+  overflow: hidden;
+}
+
+.malvr-full[open] {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.malvr-full::backdrop {
+  background: rgb(0 0 0 / 0.78);
+}
+
+.malvr-full-poster {
+  padding: 0;
+  border: 0;
+  background: #000;
+  cursor: zoom-in;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.malvr-full-poster .malvr-poster {
+  height: min(600px, calc(100vh - 34px));
+  width: auto;
+}
+
+.malvr-full-poster img {
+  object-fit: contain;
+}
+
+.malvr-full-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px 56px 24px 28px;
+  overflow-y: auto;
+  max-height: calc(100vh - 34px);
+  font-size: 13px;
+}
+
+.malvr-full-count {
+  color: var(--malvr-muted);
+  font-size: 12px;
+}
+
+/* Id-anchored: MAL styles h2/dt/dd inside its page wrappers. */
+#malvr-full .malvr-full-title {
+  margin: 0;
+  text-align: left;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 22px;
+  line-height: 1.25;
+}
+
+#malvr-full .malvr-full-title a {
+  color: var(--malvr-text) !important;
+}
+
+.malvr-full-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--malvr-muted);
+}
+
+#malvr-full .malvr-full-meta .malvr-rank {
+  position: static;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 20px;
+}
+
+#malvr-full .malvr-full-meta .malvr-score {
+  position: static;
+  font-size: 13px;
+}
+
+.malvr-full-details {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 16px;
+  margin: 0;
+}
+
+#malvr-full .malvr-full-details dt {
+  text-align: left;
+  color: var(--malvr-muted);
+}
+
+#malvr-full .malvr-full-details dd {
+  text-align: left;
+  margin: 0;
+}
+
+.malvr-full-synopsis {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.malvr-full-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.malvr-btn {
+  font: inherit;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--malvr-border);
+  background: var(--malvr-surface);
+  color: var(--malvr-text) !important;
+  cursor: pointer;
+  text-decoration: none !important;
+}
+
+.malvr-btn-primary {
+  background: var(--malvr-accent);
+  border-color: var(--malvr-accent);
+  color: var(--malvr-accent-text) !important;
+}
+
+.malvr-full-keys {
+  margin: 0;
+  color: var(--malvr-muted);
+  font-size: 11px;
+}
+
+.malvr-full-close,
+.malvr-full-nav {
+  position: absolute;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 0.55);
+  color: #fff;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.malvr-full-close {
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  font-size: 22px;
+}
+
+.malvr-full-nav {
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  font-size: 26px;
+}
+
+.malvr-prev {
+  left: 10px;
+}
+
+.malvr-next {
+  right: 10px;
+}
+
+.malvr-full-close:hover,
+.malvr-full-nav:hover {
+  background: rgb(0 0 0 / 0.8);
+}
+
+/* Poster-only zoom */
+.malvr-full.malvr-zoomed {
+  width: auto;
+  background: #000;
+}
+
+.malvr-full.malvr-zoomed[open] {
+  grid-template-columns: auto;
+}
+
+.malvr-full.malvr-zoomed .malvr-full-info {
+  display: none;
+}
+
+.malvr-full.malvr-zoomed .malvr-full-poster {
+  cursor: zoom-out;
+}
+
+.malvr-full.malvr-zoomed .malvr-full-poster .malvr-poster {
+  height: calc(100vh - 34px);
+}
+
+@media (max-width: 720px) {
+  .malvr-full[open] {
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+  }
+
+  .malvr-full-poster .malvr-poster {
+    height: 55vh;
+  }
+
+  .malvr-full-info {
+    max-height: none;
+    padding: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #malvr-root *,
+  .malvr-full * {
+    transition: none !important;
+  }
+}

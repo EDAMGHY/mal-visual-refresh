@@ -1,0 +1,29 @@
+{
+  "name": "mal-visual-refresh",
+  "version": "0.1.0",
+  "description": "Unofficial poster-first view for MyAnimeList search results and top lists (Chrome extension).",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EDAMGHY/mal-visual-refresh.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "watch": "node scripts/build.mjs --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.3.7",
+    "@types/node": "^22.20.5",
+    "esbuild": "^0.24.0",
+    "jsdom": "^25.0.1",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
+  }
+}

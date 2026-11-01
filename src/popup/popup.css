@@ -1,0 +1,7 @@
+body { width: 240px; margin: 0; padding: 12px 14px; font: 13px system-ui, sans-serif; color: #1c1f26; }
+h1 { font-size: 14px; margin: 0 0 12px; }
+.row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+select, button { font: inherit; }
+button { width: 100%; padding: 6px; margin-top: 4px; cursor: pointer; }
+.note { color: #5b6475; font-size: 11px; margin: 10px 0 0; }
+@media (prefers-color-scheme: dark) { body { background: #222326; color: #e6e8ec; } .note { color: #a3a9b5; } }

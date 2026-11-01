@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "MAL Visual Refresh",
+  "version": "0.1.0",
+  "description": "An independent, unofficial poster-first view for MyAnimeList search results and top lists.",
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_title": "MAL Visual Refresh",
+    "default_popup": "popup/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://myanimelist.net/anime.php*",
+        "https://myanimelist.net/manga.php*",
+        "https://myanimelist.net/topanime.php*",
+        "https://myanimelist.net/topmanga.php*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
